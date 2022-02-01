@@ -16,7 +16,7 @@ const AddEmployee = () => {
     const handleChange = (e) =>{
         const value = e.target.value;
         addEmployee({ ...employee, [e.target.name]:value});
-    }
+    };
 
     const saveEmployee = (e) =>{
         e.preventDefault();
@@ -25,8 +25,18 @@ const AddEmployee = () => {
             navigate('/employeeList')
         }).catch((error) => {
             console.log(error)
-        })
-    }
+        });
+    };
+
+    const reset = (e) => {
+        e.preventDefault();
+        addEmployee({
+            id:"",
+            firstName:"",
+            lastName:"",
+            emailId:""
+        });
+    };
 
   return <div className='flex max-w-2xl mx-auto shadow border-b'>
       <div className='px-8 py-8'>
@@ -62,7 +72,7 @@ const AddEmployee = () => {
           </div>
           <div className='items-center justify-center h-14 w-full my-4 pt-4 space-x-4'>
               <button onClick={saveEmployee} className='rounded text-white font-semibold bg-green-400 py-2 px-6 hover:bg-green-700'>Save</button>
-              <button className='rounded text-white font-semibold bg-red-400 py-2 px-6 hover:bg-red-700'>Clear</button>
+              <button onClick={reset} className='rounded text-white font-semibold bg-red-400 py-2 px-6 hover:bg-red-700'>Clear</button>
           </div>
       </div>
   </div>;
