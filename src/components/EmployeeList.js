@@ -22,6 +22,17 @@ function EmployeeList() {
         };
         fetchData();
     }, []);
+
+    const deleteEmployee = (e, id) => {
+        e.preventDefault();
+        EmployeeService.deleteEmployee(id).then((res) => {
+            if(employees){
+                setEmployees((preElement) => {
+                    return preElement.filter((employee) => employee.id !== id);
+                });
+            }
+        });
+    };
     
 
   return (
@@ -44,7 +55,7 @@ function EmployeeList() {
                 {!loading &&(
                     <tbody className='bg-white'>
                         {employees.map((employee) =>(
-                            <Employee employee={employee} key={employee.id}></Employee>
+                            <Employee employee={employee} deleteEmployee={deleteEmployee} key={employee.id}></Employee>
                         ))}
                     </tbody>
                 )}
